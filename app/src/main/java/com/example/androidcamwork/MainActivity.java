@@ -1,6 +1,9 @@
 package com.example.androidcamwork;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,5 +23,15 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    public void launchCameraAction(View view)
+    {
+        view.animate();
+        Toast.makeText(MainActivity.this, "You are doing this in the right order!", Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        startActivity(intent);
+
     }
 }
