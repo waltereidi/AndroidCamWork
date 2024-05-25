@@ -1,8 +1,17 @@
 package com.example.androidcamwork;
 
+import static android.content.ContentValues.TAG;
+
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -11,8 +20,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+public class MainActivity extends AppCompatActivity {
+    static final int REQUEST_IMAGE_CAPTURE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,11 +41,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void launchCameraAction(View view)
     {
-        view.animate();
-        Toast.makeText(MainActivity.this, "You are doing this in the right order!", Toast.LENGTH_LONG).show();
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            if(takePictureIntent.resolveActivity(this.getPackageManager()) != null)
+            {
+                File photoFile = null ;
+                photoFile = this.getPackageManager() ;
+            }
 
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        startActivity(intent);
-
+        } catch (ActivityNotFoundException e) {
+            // display error state to the user
+        }
     }
+
 }
