@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -96,6 +97,13 @@ public class MainActivity extends AppCompatActivity {
             // display error state to the user
         }
     }
+    public void changeScreen(View view)
+    {
+        Intent newIntent = new Intent(this , Activity2.class);
+        startActivity(newIntent);
+
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
